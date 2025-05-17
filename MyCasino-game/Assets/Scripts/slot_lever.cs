@@ -1,16 +1,61 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class slot_lever : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private Quaternion startRotation;
+    private Quaternion targetRotation;
+    private bool isActivated = false;
+    private bool isReturning = false;
+
+    private float rotationSpeed = 200f; // Grad pro Sekunde
+    private float delayBeforeReturn = 0.1f;
+    private float returnTimer = 0f;
+
     void Start()
     {
-        
+        startRotation = transform.rotation;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (isActivated && !isReturning)
+        {
+            // Drehe nach vorne (aktivieren)
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+            if (Quaternion.Angle(transform.rotation, targetRotation) < 0.5f)
+            {
+                transform.rotation = targetRotation;
+                isReturning = true;
+                returnTimer = 0f;
+            }
+        }
+
+        if (isReturning)
+        {
+            returnTimer += Time.deltaTime;
+
+            if (returnTimer >= delayBeforeReturn)
+            {
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, startRotation, rotationSpeed * Time.deltaTime);
+
+                if (Quaternion.Angle(transform.rotation, startRotation) < 0.5f)
+                {
+                    transform.rotation = startRotation;
+                    isActivated = false;
+                    isReturning = false;
+                }
+            }
+        }
+    }
+
+    public void ActivateLever()
+    {
+        if (isActivated) return;
+
+        // Zielrotation = 90° mehr auf X-Achse
+        targetRotation = Quaternion.Euler(transform.eulerAngles.x + 55f, transform.eulerAngles.y, transform.eulerAngles.z);
+        isActivated = true;
+        isReturning = false;
     }
 }
