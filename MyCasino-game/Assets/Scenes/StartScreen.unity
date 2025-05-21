@@ -711,6 +711,7 @@ Canvas:
   m_GameObject: {fileID: 410072334}
   m_Enabled: 1
   serializedVersion: 3
+  m_RenderMode: 0
   m_Camera: {fileID: 2105060591}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -719,6 +720,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -737,6 +739,7 @@ RectTransform:
   m_Children:
   - {fileID: 734211413}
   - {fileID: 383588196}
+  - {fileID: 394630199}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
