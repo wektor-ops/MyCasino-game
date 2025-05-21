@@ -51,13 +51,13 @@ public class slot_lever : MonoBehaviour
 
     public void ActivateLever()
     {
-        if (isActivated)
+        if (isActivated || slotMachineScript.IsRolling())
         {
-            return;
+            return; // Verhindert mehrfaches Aktivieren während Drehung oder Hebelanimation
         }
 
-        if (player.geld > 1)
-        { 
+        if (player.geld >= 1)
+        {
             slotMachineScript.activateRoll = true;
 
             // Zielrotation = 55° mehr auf X-Achse (Animation starten)
@@ -67,10 +67,11 @@ public class slot_lever : MonoBehaviour
         }
         else
         {
-            // Zielrotation = 35° mehr auf X-Achse (Animation starten)
+            // Animation wenn kein Geld
             targetRotation = Quaternion.Euler(transform.eulerAngles.x + 35f, transform.eulerAngles.y, transform.eulerAngles.z);
             isActivated = true;
             isReturning = false;
         }
     }
+
 }

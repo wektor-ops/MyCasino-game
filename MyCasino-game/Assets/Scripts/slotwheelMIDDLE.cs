@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class slotwheelLEFT : MonoBehaviour
+public class slotwheelMIDDLE : MonoBehaviour
 {
     private int rotation;
     public slot_machinecounting machine;
@@ -12,22 +12,22 @@ public class slotwheelLEFT : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (machine.rotationstartleft && !isSpinning)
+        if (machine.rotationstartmiddle && !isSpinning)
         {
             isSpinning = true;
-            machine.rotationstartleft = false;
+            machine.rotationstartmiddle = false;
             StartCoroutine(drehung());
         }
     }
     private IEnumerator drehung()
     {
         float angle = -45f;
-        if (rotation != 0 || rotation != 8)
+        if (rotation != 0)
         {
-            while (rotation != 8)
+            while (rotation != 8 || rotation != 8)
             {
                 Quaternion startRotation = transform.rotation;
-                Quaternion endRotation = startRotation * Quaternion.Euler(0, 0, angle );
+                Quaternion endRotation = startRotation * Quaternion.Euler(0, 0, angle);
 
                 float elapsed = 0f;
                 float duration = 0.1f;
@@ -45,11 +45,11 @@ public class slotwheelLEFT : MonoBehaviour
             }
         }
         rotation = 0;
-        rotation += machine.slotwheelLeft + 24;
+        rotation += machine.slotwheelMiddle + 24;
         for (int i = 0; i < rotation; i++)
         {
             // um 45 Grad drehen
-            
+
             Quaternion startRotation = transform.rotation;
             Quaternion endRotation = startRotation * Quaternion.Euler(0, 0, angle);
 
@@ -68,6 +68,5 @@ public class slotwheelLEFT : MonoBehaviour
         }
         rotation -= 24;
         isSpinning = false;
-        machine.rotationstartleft = false;
     }
 }
