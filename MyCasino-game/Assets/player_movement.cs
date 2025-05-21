@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class player_movement : MonoBehaviour
 {
+    public int geld = 10;
     public CharacterController controller;
     public float speed = 6f;
     public float jumpHeight = 3f;

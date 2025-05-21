@@ -2,6 +2,8 @@
 
 public class slot_lever : MonoBehaviour
 {
+    public slot_machinecounting slotMachineScript;
+    public player_movement player;
     private Quaternion startRotation;
     private Quaternion targetRotation;
     private bool isActivated = false;
@@ -22,7 +24,6 @@ public class slot_lever : MonoBehaviour
         {
             // Drehe nach vorne (aktivieren)
             transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-
             if (Quaternion.Angle(transform.rotation, targetRotation) < 0.5f)
             {
                 transform.rotation = targetRotation;
@@ -34,7 +35,6 @@ public class slot_lever : MonoBehaviour
         if (isReturning)
         {
             returnTimer += Time.deltaTime;
-
             if (returnTimer >= delayBeforeReturn)
             {
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, startRotation, rotationSpeed * Time.deltaTime);
@@ -51,11 +51,26 @@ public class slot_lever : MonoBehaviour
 
     public void ActivateLever()
     {
-        if (isActivated) return;
+        if (isActivated)
+        {
+            return;
+        }
 
-        // Zielrotation = 90° mehr auf X-Achse
-        targetRotation = Quaternion.Euler(transform.eulerAngles.x + 55f, transform.eulerAngles.y, transform.eulerAngles.z);
-        isActivated = true;
-        isReturning = false;
+        if (player.geld > 1)
+        { 
+            slotMachineScript.activateRoll = true;
+
+            // Zielrotation = 55° mehr auf X-Achse (Animation starten)
+            targetRotation = Quaternion.Euler(transform.eulerAngles.x + 55f, transform.eulerAngles.y, transform.eulerAngles.z);
+            isActivated = true;
+            isReturning = false;
+        }
+        else
+        {
+            // Zielrotation = 35° mehr auf X-Achse (Animation starten)
+            targetRotation = Quaternion.Euler(transform.eulerAngles.x + 35f, transform.eulerAngles.y, transform.eulerAngles.z);
+            isActivated = true;
+            isReturning = false;
+        }
     }
 }
