@@ -56,8 +56,9 @@ public class slot_lever : MonoBehaviour
             return; // Verhindert mehrfaches Aktivieren während Drehung oder Hebelanimation
         }
 
-        if (player.geld >= 1)
+        if (player.geld >= 10)
         {
+            player.geld -= 10;
             slotMachineScript.activateRoll = true;
 
             // Zielrotation = 55° mehr auf X-Achse (Animation starten)

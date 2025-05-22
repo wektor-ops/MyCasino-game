@@ -12,9 +12,8 @@ public class slotwheelMIDDLE : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (machine.rotationstartmiddle && !isSpinning)
+        if (machine.rotationstartmiddle)
         {
-            isSpinning = true;
             machine.rotationstartmiddle = false;
             StartCoroutine(drehung());
         }

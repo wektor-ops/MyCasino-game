@@ -22,6 +22,7 @@ public class slot_machinecounting : MonoBehaviour
     {
         return isRolling;
     }
+
     void Update()
     {
         if (activateRoll && !isRolling)
@@ -40,10 +41,12 @@ public class slot_machinecounting : MonoBehaviour
     private void SlotActivated()
     {
         isRolling = true;
-
         rotationstartleft = true;
         rotationstartmiddle = true;
         rotationstartright = true;
+        middle.isSpinning = true;
+        right.isSpinning = true;
+        left.isSpinning = true;
         slotwheelLeft = Random.Range(1, 9);
         slotwheelMiddle = Random.Range(1, 9);
         slotwheelRight = Random.Range(1, 9);
@@ -53,11 +56,11 @@ public class slot_machinecounting : MonoBehaviour
     {
         if (slotwheelLeft == slotwheelMiddle && slotwheelMiddle == slotwheelRight)
         {
-            player.geld += 100;
+            player.geld += 350;
         }
         else if (slotwheelLeft == slotwheelMiddle || slotwheelLeft == slotwheelRight || slotwheelMiddle == slotwheelRight)
         {
-            player.geld += 40;
+            player.geld += 20;
         }
 
         Debug.Log(slotwheelLeft + " " + slotwheelMiddle + " " + slotwheelRight + " = " + player.geld);
